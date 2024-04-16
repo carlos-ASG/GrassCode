@@ -9,6 +9,13 @@ tokens = [
     'LLAVE_C',
     'IF_token',
     'WHILE_token',
+    'SWITCH_token'
+]
+
+reservadas = [
+    'if', 
+    'while',
+    'switch'
 ]
 
 t_PARENTESIS_A = r"\("
@@ -18,7 +25,7 @@ t_LLAVE_C = r"\}"
 
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
-    if t.value in ['if', 'while']:
+    if t.value in reservadas:
         t.type = t.value.upper() + '_token'
     return t
 
@@ -28,7 +35,6 @@ def t_newline(t):
 
 t_ignore = ' \t'
 
-# Move this line to here
 lexer = lex.lex()
 
 def analisis(cadena):
@@ -41,5 +47,5 @@ def analisis(cadena):
     return tokens
 
 if __name__ == '__main__':
-    codigo = r'(){} carlos'
+    codigo = '() carlos if switch'
     print(analisis(codigo))
