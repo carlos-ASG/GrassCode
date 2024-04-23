@@ -32,6 +32,11 @@ tokens = [
     'NOT_token',
     'AND_token',
     'RETURN_token',
+    'POTENCIA',
+    'CORIZQ',
+    'CORDER',
+    'SUMA',
+    'RESTA',
 ]
 
 reservadas = [
