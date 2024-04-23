@@ -37,7 +37,16 @@ tokens = [
     'CORDER',
     'SUMA',
     'RESTA',
-]
+    'MULT',
+    'DIV',
+    'MODULO',
+    'ASIGNAR',
+    'MENORQUE',
+    'MAYORQUE',
+    'PUNTOCOMA',
+    'COMA'
+],
+
 
 reservadas = [
     'if',
@@ -133,5 +142,5 @@ def analisis(cadena):
     return tokens
 
 if __name__ == '__main__':
-    codigo = '() carlos if switch < <= return void'
+    codigo = '() carlos if switch'
     print(analisis(codigo))
