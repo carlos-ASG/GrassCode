@@ -8,8 +8,30 @@ tokens = [
     'LLAVE_A',
     'LLAVE_C',
     'IF_token',
+    'ELSE_token',
     'WHILE_token',
-    'SWITCH_token'
+    'SWITCH_token',
+    'FUN_token',
+    'FOR_token',
+    'BRING_token',
+    'TRY_token',
+    'CATCH_token',
+    'VOID_token',
+    'CLASS_token',
+    'CONST_token',
+    'RETURN_token',
+    'INIT_token',
+    'DEGREE_token',
+    'TIME_token',
+    'DISTANCE_token',
+    'TEMP_token',
+    'BOOL_token',
+    'STATE_TOKEN',
+    'ANY_token',
+    'OR_token',
+    'NOT_token',
+    'AND_token',
+    'RETURN_token',
 ]
 
 reservadas = [
@@ -36,7 +58,8 @@ reservadas = [
     'any',
     'or',
     'not',
-    'and'
+    'and',
+    'return'
 ]
 
 t_PARENTESIS_A = r"\("
@@ -48,9 +71,9 @@ t_CORDER = r'\]'
 t_SUMA = r"\+"
 t_RESTA = r"\-"
 t_MULT = r'\*'
-t_DIV = r'/'
+t_DIV = r'\/'
 t_MODULO = r'\%'
-t_POTENCIA = r'(\^)'
+t_POTENCIA = r'\^'
 t_ASIGNAR = r'='
 t_MENORQUE = r'<'
 t_MAYORQUE = r'>'
@@ -78,29 +101,6 @@ def t_CADENA(t):
    r'\"?(\w+ \ *\w*\d* \ *)\"?'
    return t
 
-def t_SINO(t):
-    r'else'
-    return t
-
-def t_SI(t):
-    r'if'
-    return t
-
-def t_RETURN(t):
-   r'return'
-   return t
-
-def t_VOID(t):
-   r'void'
-   return t
-
-def t_MIENTRAS(t):
-    r'while'
-    return t
-
-def t_PARA(t):
-    r'for'
-    return t
 
 def t_MENORIGUAL(t):
     r'<='
@@ -112,14 +112,6 @@ def t_MAYORIGUAL(t):
 
 def t_IGUAL(t):
     r'=='
-    return t
-
-def t_MENOR(t):
-    r'<'
-    return t
-
-def t_MAYOR(t):
-    r'>'
     return t
 
 t_ignore = ' \t'
@@ -136,5 +128,5 @@ def analisis(cadena):
     return tokens
 
 if __name__ == '__main__':
-    codigo = '() carlos if switch'
+    codigo = '() carlos if switch < <= return void'
     print(analisis(codigo))
