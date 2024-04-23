@@ -30,7 +30,6 @@ tokens = [
     'OR_token',
     'NOT_token',
     'AND_token',
-    'RETURN_token',
     'POTENCIA',
     'CORIZQ',
     'CORDER',
@@ -43,7 +42,18 @@ tokens = [
     'MENORQUE',
     'MAYORQUE',
     'PUNTOCOMA',
-    'COMA'
+    'COMA',
+    'NUMERO',
+    'SIMGRADOS',
+    'COMILLA_S',
+    'COMILLA_D',
+    'DOSPUNTOS',
+    'IGUAL',
+    'MENORIGUAL',
+    'REAL',
+    'PUNTO',
+    'CADENA',
+    'GRADOS'
 ]
 
 
@@ -71,8 +81,7 @@ reservadas = [
     'any',
     'or',
     'not',
-    'and',
-    'return'
+    'and'
 ]
 
 t_PARENTESIS_A = r"\("
@@ -105,27 +114,38 @@ def t_newline(t):
     t.lexer.lineno += len(t.value)
     return t
 
-def t_ENTERO(t):
-    r'\d+'
-    t.value = int(t.value)
+def t_GRADOS(t):
+    r'([0-9]{1,3})°\s*([0-9]{1,2})\'\s*([0-9]{1,2})\"'
+    t.value = t.value
     return t
 
-def t_CADENA(t):
-   r'\"?(\w+ \ *\w*\d* \ *)\"?'
-   return t
+def t_NUMERO(t):
+    r'\d+(\.\d+)?'
+    t.value = t.value
+    return t
 
 
 def t_MENORIGUAL(t):
     r'<='
+    t.value = t.value
     return t
 
 def t_MAYORIGUAL(t):
     r'>='
+    t.value = t.value
     return t
 
 def t_IGUAL(t):
     r'=='
+    t.value = t.value
     return t
+
+
+
+def t_error(t):
+    print("Illegal character '%s'" % t.value[0])
+    t.lexer.skip(1)
+
 
 t_ignore = ' \t'
 
@@ -141,5 +161,5 @@ def analisis(cadena):
     return tokens
 
 if __name__ == '__main__':
-    codigo = '() carlos if switch'
+    codigo = '() carlos if switch 123°45\'67\"  3.5'
     print(analisis(codigo))
