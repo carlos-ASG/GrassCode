@@ -1,4 +1,3 @@
-from typing import List
 import ply.lex as lex
 
 tokens = [
@@ -45,7 +44,7 @@ tokens = [
     'MAYORQUE',
     'PUNTOCOMA',
     'COMA'
-],
+]
 
 
 reservadas = [
