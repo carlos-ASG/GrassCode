@@ -1,6 +1,34 @@
 import ply.lex as lex
 
-tokens = [
+reservadas = [
+    'if',
+    'else', 
+    'while',
+    'switch',
+    'fun',
+    'for',
+    'bring',
+    'try',
+    'catch',
+    'void',
+    'class',
+    'const',
+    'return',
+    'init',
+    'degree',
+    'time',
+    'distance',
+    'temp',
+    'bool',
+    'state',
+    'any',
+    'or',
+    'not',
+    'and',
+    'var'
+]
+
+tokens = reservadas + [
     'ID',
     'PARENTESIS_A',
     'PARENTESIS_C',
@@ -54,34 +82,6 @@ tokens = [
     'PUNTO',
     'CADENA',
     'GRADOS'
-]
-
-
-reservadas = [
-    'if',
-    'else', 
-    'while',
-    'switch',
-    'fun',
-    'for',
-    'bring',
-    'try',
-    'catch',
-    'void',
-    'class',
-    'const',
-    'return',
-    'init',
-    'degree',
-    'time',
-    'distance',
-    'temp',
-    'bool',
-    'state',
-    'any',
-    'or',
-    'not',
-    'and'
 ]
 
 t_PARENTESIS_A = r"\("
@@ -161,5 +161,5 @@ def analisis(cadena):
     return tokens
 
 if __name__ == '__main__':
-    codigo = '() carlos if switch 123°45\'67\"  3.5'
+    codigo = 'any x = 5 @ 3;'
     print(analisis(codigo))
