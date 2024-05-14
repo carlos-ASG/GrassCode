@@ -49,10 +49,6 @@ def p_expresion_operaciones(t):
             t[0] *= t[1]
             i -= 1
 
-def p_expresion_uminus(t):
-    'expresion : RESTA expresion %prec UMINUS'
-    t[0] = -t[2]
-
 def p_expresion_grupo(t):
     '''
     expresion  : PARIZQ expresion PARDER
