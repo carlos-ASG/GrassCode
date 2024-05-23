@@ -1,165 +1,134 @@
 import ply.lex as lex
 
-reservadas = [
-    'if',
-    'else', 
-    'while',
-    'switch',
-    'fun',
-    'for',
-    'bring',
-    'try',
-    'catch',
-    'void',
-    'class',
-    'const',
-    'return',
-    'init',
-    'degree',
-    'time',
-    'distance',
-    'temp',
-    'bool',
-    'state',
-    'any',
-    'or',
-    'not',
-    'and',
-    'var'
-]
+# Tabla de hash para palabras reservadas
+palabras_reservadas = {
+    'if': 'IF',
+    'else': 'ELSE',
+    'while': 'WHILE',
+    'switch': 'SWITCH',
+    'fun': 'FUN',
+    'for': 'FOR',
+    'bring': 'BRING',
+    'try': 'TRY',
+    'catch': 'CATCH',
+    'void': 'VOID',
+    'class': 'CLASS',
+    'const': 'CONST',
+    'return': 'RETURN',
+    'init': 'INIT',
+    'degree': 'DEGREE',
+    'time': 'TIME',
+    'distance': 'DISTANCE',
+    'temp': 'TEMP',
+    'bool': 'BOOL',
+    'state': 'STATE',
+    'any': 'ANY',
+    'or': 'OR',
+    'not': 'NOT',
+    'and': 'AND',
+    'var': 'VAR'
+}
 
-tokens = reservadas + [
-    'ID',
-    'PARENTESIS_A',
-    'PARENTESIS_C',
-    'LLAVE_A',
-    'LLAVE_C',
-    'IF_token',
-    'ELSE_token',
-    'WHILE_token',
-    'SWITCH_token',
-    'FUN_token',
-    'FOR_token',
-    'BRING_token',
-    'TRY_token',
-    'CATCH_token',
-    'VOID_token',
-    'CLASS_token',
-    'CONST_token',
-    'RETURN_token',
-    'INIT_token',
-    'DEGREE_token',
-    'TIME_token',
-    'DISTANCE_token',
-    'TEMP_token',
-    'BOOL_token',
-    'STATE_TOKEN',
-    'ANY_token',
-    'OR_token',
-    'NOT_token',
-    'AND_token',
-    'POTENCIA',
-    'CORIZQ',
-    'CORDER',
-    'SUMA',
-    'RESTA',
-    'MULT',
-    'DIV',
-    'MODULO',
-    'ASIGNAR',
-    'MENORQUE',
-    'MAYORQUE',
-    'PUNTOCOMA',
-    'COMA',
-    'NUMERO',
-    'SIMGRADOS',
-    'COMILLA_S',
-    'COMILLA_D',
-    'DOSPUNTOS',
-    'IGUAL',
-    'MENORIGUAL',
-    'REAL',
-    'PUNTO',
-    'CADENA',
-    'GRADOS'
-]
+# Lista de tokens
+tokens = [
+    'ID', 'PARENTESIS_APERTURA', 'PARENTESIS_CIERRE', 'LLAVE_APERTURA', 'LLAVE_CIERRE',
+    'CORCHETE_APERTURA', 'CORCHETE_CIERRE', 'SUMA', 'RESTA', 'MULTIPLICACION', 'DIVISION',
+    'MODULO', 'POTENCIA', 'MENORQUE', 'MAYORQUE', 'IGUAL', 'MENORIGUAL', 'MAYORIGUAL',
+    'ASIGNAR', 'PUNTOCOMA', 'COMA', 'COMILLAS_SIMPLES', 'COMILLAS_DOBLES', 'DOSPUNTOS',
+    'PUNTO', 'NUMERO', 'CADENA', 'GRADOS', 'SIMGRADOS', 'REAL', 'AND_LOGICO', 'OR_LOGICO',
+    'INCREMENTO', 'DECREMENTO'
+] + list(palabras_reservadas.values())
 
-t_PARENTESIS_A = r"\("
-t_PARENTESIS_C = r"\)"
-t_LLAVE_A = r"\{"
-t_LLAVE_C = r"\}"
-t_CORIZQ = r'\['
-t_CORDER = r'\]'
-t_SUMA = r"\+"
-t_RESTA = r"\-"
-t_MULT = r'\*'
-t_DIV = r'\/'
-t_MODULO = r'\%'
+# Expresiones regulares para identificar los caracteres en el código
+t_PARENTESIS_APERTURA = r'\('
+t_PARENTESIS_CIERRE = r'\)'
+t_LLAVE_APERTURA = r'\{'
+t_LLAVE_CIERRE = r'\}'
+t_CORCHETE_APERTURA = r'\['
+t_CORCHETE_CIERRE = r'\]'
+t_SUMA = r'\+'
+t_RESTA = r'-'
+t_MULTIPLICACION = r'\*'
+t_DIVISION = r'/'
+t_MODULO = r'%'
 t_POTENCIA = r'\^'
-t_ASIGNAR = r'='
 t_MENORQUE = r'<'
 t_MAYORQUE = r'>'
-t_PUNTOCOMA = ';'
+t_IGUAL = r'=='
+t_MENORIGUAL = r'<='
+t_MAYORIGUAL = r'>='
+t_AND_LOGICO = r'&&'
+t_OR_LOGICO = r'\|\|'
+t_INCREMENTO = r'\+\+'
+t_DECREMENTO = r'--'
+t_PUNTOCOMA = r';'
 t_COMA = r','
+t_ASIGNAR = r'='
+t_ignore = ' \t'
 
+# Manejo de comentarios
+def t_COMENTARIO_LINEA(t):
+    r'//.*'
+    pass  # Ignorar comentarios de una sola línea
 
+def t_COMENTARIO_BLOQUE(t):
+    r'/\*[^*]*\*+(?:[^/*][^*]*\*+)*/'
+    t.lexer.lineno += t.value.count('\n')
+    pass  # Ignorar comentarios de múltiples líneas
+
+# Métodos para iniciar la tokenización
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
-    if t.value in reservadas:
-        t.type = t.value.upper() + '_token'
+    t.type = palabras_reservadas.get(t.value, 'ID')
     return t
 
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
-    return t
 
 def t_GRADOS(t):
-    r'([0-9]{1,3})°\s*([0-9]{1,2})\'\s*([0-9]{1,2})\"'
-    t.value = t.value
+    r'(\d{1,3})°\*(\d{1,2})\'\*(\d{1,2})"'
     return t
 
 def t_NUMERO(t):
     r'\d+(\.\d+)?'
-    t.value = t.value
+    t.value = float(t.value)
     return t
 
-
-def t_MENORIGUAL(t):
-    r'<='
-    t.value = t.value
+def t_CADENA(t):
+    r'\"([^\\\n]|(\\.))*?\"'
+    t.value = t.value[1:-1]  # Remover las comillas
     return t
 
-def t_MAYORIGUAL(t):
-    r'>='
-    t.value = t.value
-    return t
-
-def t_IGUAL(t):
-    r'=='
-    t.value = t.value
-    return t
-
-
+errores = []
 
 def t_error(t):
-    print("Illegal character '%s'" % t.value[0])
+    mensaje_error = f"Carácter ilegal '{t.value[0]}' en la línea {t.lineno}, columna {t.lexpos}"
+    errores.append(mensaje_error)
     t.lexer.skip(1)
 
-
-t_ignore = ' \t'
-
+# Construir el analizador léxico
 lexer = lex.lex()
 
-def analisis(cadena):
-    lexer.input(cadena)
-    tokens = []
+def find_column(input, token):
+    last_cr = input.rfind('\n', 0, token.lexpos)
+    if last_cr < 0:
+        last_cr = -1
+    return token.lexpos - last_cr
 
+def analisis(cadena):
+    lexer.input(cadena)  # Introducir la cadena de entrada al lexer
+    tokens = []
     for tok in lexer:
-        columna =  tok.lexpos - cadena.rfind('\n',0,tok.lexpos)
+        columna = find_column(cadena, tok)
         tokens.append((tok.value, tok.type, tok.lineno, columna))
     return tokens
 
 if __name__ == '__main__':
-    codigo = 'any x = 5 @ 3;'
-    print(analisis(codigo))
+    codigo = 'x==5;'
+    resultado =analisis(codigo)
+    print(resultado)
+    if errores:
+        print("Errores encontrados:")
+        for error in errores:
+            print(error)

@@ -1,0 +1,202 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    AND_token
+    ANY_token
+    BOOL_token
+    BRING_token
+    CADENA
+    CATCH_token
+    CLASS_token
+    COMA
+    COMILLA_D
+    COMILLA_S
+    CONST_token
+    CORDER
+    CORIZQ
+    DEGREE_token
+    DISTANCE_token
+    DIV
+    DOSPUNTOS
+    ELSE_token
+    FOR_token
+    FUN_token
+    GRADOS
+    IF_token
+    INIT_token
+    LLAVE_A
+    LLAVE_C
+    MODULO
+    MULT
+    NOT_token
+    OR_token
+    PARENTESIS_A
+    PARENTESIS_C
+    POTENCIA
+    PUNTO
+    REAL
+    RESTA
+    RETURN_token
+    SIMGRADOS
+    STATE_TOKEN
+    SUMA
+    SWITCH_token
+    TEMP_token
+    TIME_token
+    TRY_token
+    VOID_token
+    WHILE_token
+    and
+    any
+    bool
+    bring
+    catch
+    class
+    const
+    degree
+    distance
+    else
+    for
+    fun
+    if
+    init
+    not
+    or
+    return
+    state
+    switch
+    temp
+    time
+    try
+    var
+    void
+    while
+
+Grammar
+
+Rule 0     S' -> sentencia_if
+Rule 1     sentencia_if -> IF PARENTESIS_APERTURA condicion PARENTESIS_CIERRE cuerpo
+Rule 2     sentencia_if -> IF PARENTESIS_APERTURA condicion PARENTESIS_CIERRE cuerpo ELSE cuerpo
+Rule 3     condicion -> condicion AND_LOGICO condicion
+Rule 4     condicion -> condicion OR_LOGICO condicion
+Rule 5     condicion -> NOT condicion
+Rule 6     condicion -> PARENTESIS_APERTURA condicion PARENTESIS_CIERRE
+Rule 7     condicion -> exp op_relacional exp
+Rule 8     op_relacional -> MENORQUE
+Rule 9     op_relacional -> MAYORQUE
+Rule 10    op_relacional -> IGUAL
+Rule 11    op_relacional -> MENORIGUAL
+Rule 12    op_relacional -> MAYORIGUAL
+Rule 13    exp -> NUMERO
+Rule 14    exp -> ID
+Rule 15    cuerpo -> LLAVE_APERTURA declaraciones LLAVE_CIERRE
+Rule 16    declaraciones -> declaraciones declaracion
+Rule 17    declaraciones -> declaracion
+Rule 18    declaracion -> declaracion_asignar
+Rule 19    declaracion -> sentencia_if
+Rule 20    declaracion_asignar -> ID ASIGNAR exp PUNTOCOMA
+
+Terminals, with rules where they appear
+
+AND_token            : 
+ANY_token            : 
+ASIGNAR              : 20
+BOOL_token           : 
+BRING_token          : 
+CADENA               : 
+CATCH_token          : 
+CLASS_token          : 
+COMA                 : 
+COMILLA_D            : 
+COMILLA_S            : 
+CONST_token          : 
+CORDER               : 
+CORIZQ               : 
+DEGREE_token         : 
+DISTANCE_token       : 
+DIV                  : 
+DOSPUNTOS            : 
+ELSE_token           : 
+FOR_token            : 
+FUN_token            : 
+GRADOS               : 
+ID                   : 14 20
+IF_token             : 
+IGUAL                : 10
+INIT_token           : 
+LLAVE_A              : 
+LLAVE_C              : 
+MAYORQUE             : 9
+MENORIGUAL           : 11
+MENORQUE             : 8
+MODULO               : 
+MULT                 : 
+NOT_token            : 
+NUMERO               : 13
+OR_token             : 
+PARENTESIS_A         : 
+PARENTESIS_C         : 
+POTENCIA             : 
+PUNTO                : 
+PUNTOCOMA            : 20
+REAL                 : 
+RESTA                : 
+RETURN_token         : 
+SIMGRADOS            : 
+STATE_TOKEN          : 
+SUMA                 : 
+SWITCH_token         : 
+TEMP_token           : 
+TIME_token           : 
+TRY_token            : 
+VOID_token           : 
+WHILE_token          : 
+and                  : 
+any                  : 
+bool                 : 
+bring                : 
+catch                : 
+class                : 
+const                : 
+degree               : 
+distance             : 
+else                 : 
+error                : 
+for                  : 
+fun                  : 
+if                   : 
+init                 : 
+not                  : 
+or                   : 
+return               : 
+state                : 
+switch               : 
+temp                 : 
+time                 : 
+try                  : 
+var                  : 
+void                 : 
+while                : 
+
+Nonterminals, with rules where they appear
+
+AND_LOGICO           : 3
+ELSE                 : 2
+IF                   : 1 2
+LLAVE_APERTURA       : 15
+LLAVE_CIERRE         : 15
+MAYORIGUAL           : 12
+NOT                  : 5
+OR_LOGICO            : 4
+PARENTESIS_APERTURA  : 1 2 6
+PARENTESIS_CIERRE    : 1 2 6
+condicion            : 1 2 3 3 4 4 5 6
+cuerpo               : 1 2 2
+declaracion          : 16 17
+declaracion_asignar  : 18
+declaraciones        : 15 16
+exp                  : 7 7 20
+op_relacional        : 7
+sentencia_if         : 19 0
+
