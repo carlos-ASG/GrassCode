@@ -1,0 +1,47 @@
+.textbox-container {
+  display: flex;
+  padding-left: 50px;
+  padding-right: 600px;
+  padding-top: 30px;
+  padding-bottom: 5px;
+}
+
+.line-numbers {
+  width: 40px; /* Ancho de los números de línea */
+  padding-right: 5px; /* Espaciado entre los números de línea y el cuadro de texto */
+  background-color: #dfdfdf; /* Color de fondo de los números de línea */
+  border-right: 1px solid #ccc; /* Línea vertical a la derecha de los números de línea */
+  user-select: none; /* Evita que los números de línea se puedan seleccionar */
+  font-size: 20px; /* Ajusta este valor según el tamaño deseado para los números de línea */
+  line-height: 10px; /* Ajusta este valor según el interlineado deseado entre los números de línea */
+  overflow-y: hidden; /* Ocultar barra de desplazamiento vertical */
+  max-height: calc(21.7px * 14); /* Altura máxima para mostrar 14 líneas */
+  overflow-x: hidden; /* Ocultar barra de desplazamiento horizontal */
+  border: 1px solid black; /* Borde negro */
+}
+
+.line-numbers div {
+  padding: 5px;
+}
+
+.textbox {
+  flex: 1; /* Hace que el cuadro de texto ocupe todo el espacio disponible */
+  border: none; /* Elimina el borde del cuadro de texto */
+  outline: none; /* Elimina el contorno del cuadro de texto */
+  font-family: monospace; /* Usa una fuente monoespaciada para que los números de línea se alineen correctamente */
+  font-size: 16px; /* Tamaño de fuente del cuadro de texto */
+  resize: none; /* Evita que el usuario pueda redimensionar el cuadro de texto */
+}
+
+body {
+  background-color: rgb(198, 247, 236); /* Cambia este color al que desees */
+}
+
+.menu-container {
+  display: flex;
+}
+
+.table-container {
+  margin-left: 750px; /* Ajusta este valor según sea necesario */
+  margin-top: -450px;
+}
