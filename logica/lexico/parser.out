@@ -22,6 +22,10 @@ Unused terminals:
     SIMGRADOS
     SWITCH
     TRY
+<<<<<<< HEAD
+=======
+    VAR
+>>>>>>> 9125a19 (api con el sintactico)
     VOID
 
 Grammar
@@ -81,8 +85,13 @@ Rule 51    sentencia -> estructura_control
 Rule 52    sentencia -> llamada_funcion
 Rule 53    sentencia -> retorno
 Rule 54    sentencia -> expresion PUNTOCOMA
+<<<<<<< HEAD
 Rule 55    declaracion_variable -> VAR ID ASIGNAR expresion PUNTOCOMA
 Rule 56    declaracion_variable -> VAR ID PUNTOCOMA
+=======
+Rule 55    declaracion_variable -> tipo_dato ID ASIGNAR expresion PUNTOCOMA
+Rule 56    declaracion_variable -> tipo_dato ID PUNTOCOMA
+>>>>>>> 9125a19 (api con el sintactico)
 Rule 57    asignacion -> ID ASIGNAR expresion PUNTOCOMA
 Rule 58    tipo_dato -> DEGREE
 Rule 59    tipo_dato -> TIME
@@ -187,7 +196,11 @@ SWITCH               :
 TEMP                 : 43 61
 TIME                 : 41 59
 TRY                  : 
+<<<<<<< HEAD
 VAR                  : 55 56
+=======
+VAR                  : 
+>>>>>>> 9125a19 (api con el sintactico)
 VOID                 : 
 WHILE                : 17
 error                : 
@@ -227,7 +240,11 @@ sentencia_if         : 66
 sentencia_while      : 68
 sentencias           : 46 47
 termino              : 76 77 79
+<<<<<<< HEAD
 tipo_dato            : 12 13
+=======
+tipo_dato            : 12 13 55 56
+>>>>>>> 9125a19 (api con el sintactico)
 
 Parsing method: LALR
 
