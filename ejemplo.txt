@@ -1,0 +1,39 @@
+fun cuadrado():void{
+ spin(90,0,0);
+ advanced(2,0);
+ spin(90,0,0);
+ advanced(2,0);
+ spin(90,0,0);
+ advanced(2,0);
+}
+
+fun limpiarTodo():void{
+ while(not cleanWay();){
+   if(isEmptyWay();){
+    go();
+  }else{
+   spin(90,0,0);
+    if(isEmptyWay();){
+     advanced(0,30);
+     spin(-90,0,0);
+    }
+  }
+ }
+}
+
+fun main():void{
+float x = -2+2;
+if(x < 0){limpiarTodo();}
+ if(isEmptyWay();){
+  cuadrado();
+   if(tooHot();){
+     stop();
+   }
+ }else{
+  stop();
+ }
+}
+
+
+
+

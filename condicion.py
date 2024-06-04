@@ -28,8 +28,13 @@ symbol_table = {
     'f': {'type': 'bool', 'value': 'True'}
 }
 
-expresion1 = "3.14 > f"
-expresion2 = "x == 5 or y != 2.71"
+expresion1 = "3.14 > >"
+expresion2 = "k"
 
 print(f"Resultado 1: {evaluar_condicion(expresion1, symbol_table)}")  # Debería ser True
 print(f"Resultado 2: {evaluar_condicion(expresion2, symbol_table)}")  # Debería ser True
+
+#tupla = ({'tipo': 'int', 'nombre': 'grados'}, {'tipo': 'int', 'nombre': 'minutos'})
+tupla = ('int', 'a', ('int', 'b', ('int', 'c')))
+print(len(tupla))
+#{'spin': {'parametros': ({'tipo': 'int', 'nombre': 'grados'}, {'tipo': 'int', 'nombre': 'minutos'}), 'retorno': 'void'}}

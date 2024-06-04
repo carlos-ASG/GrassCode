@@ -30,7 +30,7 @@ tokens = [
     'ID', 'PARENTESIS_APERTURA', 'PARENTESIS_CIERRE', 'LLAVE_APERTURA', 'LLAVE_CIERRE',
     'CORCHETE_APERTURA', 'CORCHETE_CIERRE', 'SUMA', 'RESTA', 'MULTIPLICACION', 'DIVISION',
     'MODULO', 'MENORQUE', 'MAYORQUE', 'IGUAL','DIFERENTE', 'MENORIGUAL', 'MAYORIGUAL',
-    'ASIGNAR', 'PUNTOCOMA', 'COMA', 'DOSPUNTOS',
+    'ASIGNAR', 'PUNTOCOMA', 'COMA', 'DOSPUNTOS','MASIGUAL','MENOSIGUAL','DIVIGUAL','MULTIGUAL',
     'PUNTO', 'NUMERO','MODULO'
     'INCREMENTO','ENTERO'
 ] + list(palabras_reservadas.values())
@@ -56,30 +56,15 @@ t_MAYORIGUAL = r'>='
 t_PUNTOCOMA = r';'
 t_COMA = r','
 t_ASIGNAR = r'='
+t_MASIGUAL = r'\+='
+t_MENOSIGUAL = r'-='
+t_MULTIGUAL = r'\*='
+t_DIVIGUAL = r'\\='
 t_DOSPUNTOS = r':'
 t_PUNTO = r'\.'
 t_ignore = ' \t'
 
 # Expresiones regulares para tipos de datos personalizados
-def t_DEGREE(t):
-    r'\d+\*\d+\'\d+\"'
-    return t
-
-def t_TIME(t):
-    r'\d{1,2}:\d{2}:\d{2}'
-    return t
-
-def t_DISTANCE(t):
-    r'\d+m'
-    return t
-
-def t_TEMP(t):
-    r'\d+°'
-    return t
-
-def t_STATE(t):
-    r'[01]{2}'
-    return t
 
 # Expresiones regulares para operadores lógicos
 t_AND = r'\band\b'
@@ -108,12 +93,12 @@ def t_newline(t):
     t.lexer.lineno += len(t.value)
     
 def t_NUMERO(t):
-    r'\d+(\.\d+)'
+    r'[-]?\d+(\.\d+)?'
     t.value = float(t.value)
     return t
 
 def t_ENTERO(t):
-    r'\d+'
+    r'[-]?\d+'
     t.value = int(t.value)
     return t
 
