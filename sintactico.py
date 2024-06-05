@@ -409,7 +409,7 @@ def p_call_fun(p):
             linea = encontrar_linea(p.lexpos(1))
             errores.append(f"Error semantico en la linea {linea}: Funcion '{p[1]}' no declarada")
         else: # verifica los parametros
-            if fun_symbol_table[p[1]]['parametros']:
+            if fun_symbol_table[p[1]]['parametros'] is not None:
                 numero_parametros = len(fun_symbol_table[p[1]]['parametros'])
             else:
                 numero_parametros = 0
@@ -478,7 +478,7 @@ def p_call_fun_error5(p):
     linea = encontrar_linea(p.lexpos(4))
     mensaje = 'error sintactico en linea '+ str(linea) +': Se esperaba un ";"'
     errores.append(mensaje)
-    
+
 
 
 # declatopm de variable /////////////////////////////////////////////////
