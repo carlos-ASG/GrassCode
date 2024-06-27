@@ -84,35 +84,11 @@ class GrassCodeEditor:
         self.txtTerminal.update_idletasks()
         self.txtTerminal.config(height=int(self.interfaz.winfo_height() / 60))
         
-        self.colorear_palabras()
         
         # Sincronización del scroll
         self.txtArea.bind('<Control-MouseWheel>', self.zoom)
         self.txtArea.bind('<MouseWheel>', self.sync_scroll)
         self.txtNumber.bind('<MouseWheel>', self.sync_scroll)
-        self.txtArea.bind("<KeyRelease>", self.actualizar_colores)
-    
-
-    def colorear_palabras(self):
-        for palabra in self.palabras_a_colorear:
-            inicio = "1.0"
-            while True:
-                inicio = self.txtArea.search(palabra, inicio, stopindex=tk.END)
-                if not inicio:
-                    break
-                fin = f"{inicio}+{len(palabra)}c"
-                self.txtArea.tag_add(palabra, inicio, fin)
-                self.txtArea.tag_config(palabra, foreground="blue")
-                inicio = fin
-    
-    def actualizar_colores(self, event):
-        # Obtener el texto actual
-        texto_actual = self.txtArea.get("1.0", "end-1c")
-
-        # Actualizar colores
-        for palabra in self.palabras_a_colorear:
-            self.txtArea.tag_remove(palabra, "1.0", "end")
-        self.colorear_palabras()
     
     def update_line_numbers(self, event=None):
         self.txtNumber.config(state=tk.NORMAL)
